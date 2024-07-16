@@ -32,4 +32,4 @@ The Datasphere Server is designed to centralize and manage data across various a
 ### Example
 
 ```bash
-curl -X GET http://localhost:3000/data
+curl -X GET http://localhost:3001/users/6693ac075c33537c5b42e45b
