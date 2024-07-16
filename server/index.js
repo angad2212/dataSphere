@@ -11,12 +11,17 @@ const multer = require('multer');
 //multer: It helps you manage files that users upload to your website.
 const helmet = require('helmet');
 //helmet: Helps secure Express apps by setting various HTTP headers to protect against common web vulnerabilities.
+const path = require('path');
+const fileURLToPath = require("url");
+const {register} = require('./controllers/auth');
+const  authRoutes  = require('./routes/auth'); // Correct import statement
+
 
 //configuration
 dotenv.config();
 const app = express();
 app.use(express.json());
-app.use(helemt());
+app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan("common"));
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
@@ -45,3 +50,23 @@ const upload = multer({ storage });
 
 //filename: This tells Multer how to name the file when it's saved. 
 //It uses the original name of the file that the user uploaded.
+
+//routes with files:
+app.post('/auth/register', upload.single('picture'), register) //register: middleware function 
+//that handles the actual logic of processing the registration request.
+
+//routes:
+app.use('/auth', authRoutes);
+
+//mongoose setup
+const PORT = process.env.PORT || 6001; //another port for backup
+mongoose
+  .connect(process.env.MONGO_URL)
+  .then(() => {
+    app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
+
+    /* ADD DATA ONE TIME */
+    // User.insertMany(users);
+    // Post.insertMany(posts);
+  })
+  .catch((error) => console.log(`${error} did not connect`));
