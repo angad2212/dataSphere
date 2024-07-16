@@ -14,8 +14,8 @@ const helmet = require('helmet');
 const path = require('path');
 const fileURLToPath = require("url");
 const {register} = require('./controllers/auth');
-const  authRoutes  = require('./routes/auth'); // Correct import statement
-
+const authRoutes = require('./routes/auth'); // Correct import statement
+const userRoutes = require('./routes/user');
 
 //configuration
 dotenv.config();
@@ -57,6 +57,7 @@ app.post('/auth/register', upload.single('picture'), register) //register: middl
 
 //routes:
 app.use('/auth', authRoutes);
+app.use('/users', userRoutes);
 
 //mongoose setup
 const PORT = process.env.PORT || 6001; //another port for backup
