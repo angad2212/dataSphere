@@ -16,6 +16,9 @@ const fileURLToPath = require("url");
 const {register} = require('./controllers/auth');
 const authRoutes = require('./routes/auth'); // Correct import statement
 const userRoutes = require('./routes/user');
+const postRoutes = require('./routes/posts');
+const { verifyToken } = require('./middleware/auth');
+const {createPost} = require('./controllers/posts')
 
 //configuration
 dotenv.config();
@@ -52,12 +55,14 @@ const upload = multer({ storage });
 //It uses the original name of the file that the user uploaded.
 
 //routes with files:
-app.post('/auth/register', upload.single('picture'), register) //register: middleware function 
+app.post('/auth/register', upload.single('picture'), register); //register: middleware function 
 //that handles the actual logic of processing the registration request.
+app.post('/posts', verifyToken, upload.single('picture'), createPost);
 
 //routes:
 app.use('/auth', authRoutes);
 app.use('/users', userRoutes);
+app.use('/posts', postRoutes);
 
 //mongoose setup
 const PORT = process.env.PORT || 6001; //another port for backup
