@@ -8,7 +8,7 @@ const User = require('../models/user');
 //by salting it again and after making sure its the right one, we will give a
 //json web token to the user
 const register = async (req, res) => {
-    try {
+    try{
         const {
             firstName,
             lastName,
