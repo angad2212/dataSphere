@@ -8,13 +8,9 @@ The Datasphere Server is designed to centralize and manage data across various a
 
 - **Data Integration:** Integrates data from multiple sources, providing a unified view.
   
-- **Data Storage:** Utilizes scalable storage solutions to accommodate large volumes of structured and unstructured data.
-  
-- **Data Processing:** Implements processing pipelines for transforming and analyzing data in real-time or batch modes.
+- **Data Storage:** Utilizes perfect storage solutions for the users and the posts because of flexible MongoDB schema.
   
 - **Data Security:** Ensures data integrity and security through encryption of passwords to protect against hackers, and uses JWT authentication for secure API access.
-  
-- **API Integration:** Provides APIs for seamless integration with external applications and services, handling various types of requests.
   
 - **File Handling:** Utilizes Multer middleware for handling file uploads.
   
