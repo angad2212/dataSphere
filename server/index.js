@@ -76,3 +76,7 @@ mongoose
     // Post.insertMany(posts);
   })
   .catch((error) => console.log(`${error} did not connect`));
+
+
+  // git rm --cached .env
+  //to avoid tracking
